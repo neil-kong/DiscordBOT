@@ -4,7 +4,7 @@ from discord.ext import tasks, commands
 from PIL import Image
 
 class TaskTimes(commands.Cog):
-    # 設定整點執行一次函式
+    # 設定每小時執行一次函式
     every_hour_time = [
         datetime.time(hour = i, minute = 2, tzinfo = datetime.timezone(datetime.timedelta(hours = 8)))
         for i in range(24)
@@ -17,7 +17,6 @@ class TaskTimes(commands.Cog):
     # 每小時發送報時訊息
     @tasks.loop(time = every_hour_time)
     async def every_hour(self):
-        # 設定發送訊息的頻道ID
         await self.bot.wait_until_ready()
         channel = self.bot.get_channel(1157954102937010279)
 
